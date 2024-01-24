@@ -2,6 +2,8 @@
 // const puppeteer = require('puppeteer');
 // const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
+const { default: puppeteer } = require("puppeteer");
+
 // const app = express();
 
 // const getBrowser = () =>{
@@ -32,8 +34,19 @@
 // });
 
 // app.listen(8080, () => console.log('Listening on PORT: 8080'));
-const express = require('express');
-const puppeteer = require('puppeteer');
+
+
+
+
+
+
+
+
+
+
+
+// const express = require('express');
+// const puppeteer = require('puppeteer');
 
 const app = express();
 const port = 3000;
@@ -44,6 +57,7 @@ app.get('/', (req, res) => {
     const clientIP = req.ip;
 
     res.send(`Client's IP address is: ${clientIP}`);
+    puppeteer.launch({ headless: true });
 });
 app.get('/connect-to-browser', async (req, res) => {
     try {
@@ -51,7 +65,7 @@ app.get('/connect-to-browser', async (req, res) => {
         const browserWSEndpoint = req.query.browserWSEndpoint;
 console.log(browserWSEndpoint);
         // Connect to the browser on the client side
-        const browser = await puppeteer.connect({ browserWSEndpoint: 'wss://192.168.1.6:9222/devtools/browser' });
+        const browser = await puppeteer.connect({ browserWSEndpoint: 'ws://122.161.78.58:9222' });
 
         // Perform Puppeteer actions (e.g., open a new page)
         const page = await browser.newPage();
@@ -61,7 +75,7 @@ console.log(browserWSEndpoint);
         res.send('Connected to the browser on the client side.');
 
         // Close the browser after performing actions
-        await browser.close();
+        // await browser.close();
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
@@ -71,3 +85,16 @@ console.log(browserWSEndpoint);
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+
+
+
+
+
+
+
+
+
+
+
+// const puppeteer = require('puppeteer');
+
