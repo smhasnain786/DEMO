@@ -49,7 +49,7 @@ app.get('/connect-to-browser', async (req, res) => {
         const browserWSEndpoint = req.query.browserWSEndpoint;
 console.log(browserWSEndpoint);
         // Connect to the browser on the client side
-        const browser = await puppeteer.connect({ browserWSEndpoint: 'wss://192.168.1.6:9222/devtools/browser' });
+        const browser = await puppeteer.connect({ browserWSEndpoint: 'wss://chrome.browserless.io?token=984e9164-0222-4ea1-9386-ca400c06b362' });
 
         // Perform Puppeteer actions (e.g., open a new page)
         const page = await browser.newPage();
