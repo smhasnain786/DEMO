@@ -9,4 +9,4 @@
     RUN npm ci
     COPY . .
 
-    CMD [ "node", "demo.js" ]
+    CMD [ "node", "index.js" ]
