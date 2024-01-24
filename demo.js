@@ -37,11 +37,13 @@ const puppeteer = require('puppeteer');
 
 const app = express();
 const port = 3000;
+app.set('trust proxy', true);
+
 app.get('/', (req, res) => {
     // Get the client's IP address
-    const clientIP = req.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    
-    res.send(`Your IP address is: ${clientIP}`);
+    const clientIP = req.ip;
+
+    res.send(`Client's IP address is: ${clientIP}`);
 });
 app.get('/connect-to-browser', async (req, res) => {
     try {
@@ -49,7 +51,7 @@ app.get('/connect-to-browser', async (req, res) => {
         const browserWSEndpoint = req.query.browserWSEndpoint;
 console.log(browserWSEndpoint);
         // Connect to the browser on the client side
-        const browser = await puppeteer.connect({ browserWSEndpoint: 'wss://chrome.browserless.io?token=984e9164-0222-4ea1-9386-ca400c06b362' });
+        const browser = await puppeteer.connect({ browserWSEndpoint: 'wss://192.168.1.6:9222/devtools/browser' });
 
         // Perform Puppeteer actions (e.g., open a new page)
         const page = await browser.newPage();
