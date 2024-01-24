@@ -37,7 +37,12 @@ const puppeteer = require('puppeteer');
 
 const app = express();
 const port = 3000;
-
+app.get('/', (req, res) => {
+    // Get the client's IP address
+    const clientIP = req.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    
+    res.send(`Your IP address is: ${clientIP}`);
+});
 app.get('/connect-to-browser', async (req, res) => {
     try {
         // Extract browserWSEndpoint from query parameter
