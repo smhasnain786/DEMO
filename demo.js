@@ -7,7 +7,8 @@ const puppeteer = require('puppeteer');
 // let browserInstance;
 
 // app.listen(port, async () => {
-//   console.log(`Browser CLI is running at http://localhost:${port}`);
+//   console.log(`Browser CLI is running at http://localhost:${port}`)
+(async () => {;
   browserInstance = await puppeteer.launch();
 // });
 
@@ -21,7 +22,7 @@ const puppeteer = require('puppeteer');
 //     res.status(500).json({ error: 'Internal Server Error' });
 //   }
 // });
-
+})();
 // app.on('exit', () => {
 //   if (browserInstance) {
 //     browserInstance.close();
