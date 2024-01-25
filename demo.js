@@ -84,7 +84,7 @@ app.get('/connect-to-browser', async (req, res) => {
         const browserWSEndpoint = req.query.browserWSEndpoint;
 console.log(browserWSEndpoint);
         // Connect to the browser on the client side
-        const browser = await puppeteer.connect({ browserWSEndpoint: 'ws://127.0.0.1:9222/devtools/browser/283d7833-1171-436d-bad1-0adb0fbebc81' });
+        const browser = await puppeteer.connect({ browserWSEndpoint: 'ws://172.17.0.1:9222/devtools/browser' });
 
         // Perform Puppeteer actions (e.g., open a new page)
         const page = await browser.newPage();
@@ -111,9 +111,4 @@ app.listen(port, () => {
 
 
 
-
-
-
-
-// const puppeteer = require('puppeteer');
 
