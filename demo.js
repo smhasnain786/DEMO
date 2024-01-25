@@ -2,7 +2,7 @@
 // const puppeteer = require('puppeteer');
 // const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
-const { default: puppeteer } = require("puppeteer");
+// const { default: puppeteer } = require("puppeteer");
 
 // const app = express();
 
@@ -45,19 +45,38 @@ const { default: puppeteer } = require("puppeteer");
 
 
 
-// const express = require('express');
-// const puppeteer = require('puppeteer');
+const express = require('express');
+const puppeteer = require('puppeteer');
 
 const app = express();
 const port = 3000;
 app.set('trust proxy', true);
 
 app.get('/', (req, res) => {
-    // Get the client's IP address
-    const clientIP = req.ip;
+    // Get the server's IP address
+    const serverIP = req.socket.remoteAddress;
 
-    res.send(`Client's IP address is: ${clientIP}`);
-    puppeteer.launch({ headless: true });
+    res.send(`Server's IP address is: ${serverIP}`);
+    
+
+async function getChromeInstanceURL() {
+  const browser = await puppeteer.launch({ headless: false, args: ['--remote-debugging-port=9222'] });
+  const browserURL = browser.wsEndpoint();
+  console.log(`Chrome Instance URL: ${browserURL}`);
+
+  // Perform tasks using the new Puppeteer instance...
+
+
+}
+
+getChromeInstanceURL();
+
+    // Example: Launch Puppeteer after sending the response
+    // (async () => {
+    //     const browser = await puppeteer.launch({ headless: true });
+    //     // Perform other actions with Puppeteer
+       
+    // })();
 });
 app.get('/connect-to-browser', async (req, res) => {
     try {
@@ -65,7 +84,7 @@ app.get('/connect-to-browser', async (req, res) => {
         const browserWSEndpoint = req.query.browserWSEndpoint;
 console.log(browserWSEndpoint);
         // Connect to the browser on the client side
-        const browser = await puppeteer.connect({ browserWSEndpoint: 'ws://122.161.78.58:9222' });
+        const browser = await puppeteer.connect({ browserWSEndpoint: 'ws://127.0.0.1:9222/devtools/browser/283d7833-1171-436d-bad1-0adb0fbebc81' });
 
         // Perform Puppeteer actions (e.g., open a new page)
         const page = await browser.newPage();
