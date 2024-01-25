@@ -60,7 +60,7 @@ app.get('/', (req, res) => {
     
 
 async function getChromeInstanceURL() {
-  const browser = await puppeteer.launch({ headless: false, args: ['--remote-debugging-port=9222'] });
+  const browser = await puppeteer.launch({ headless: true, args: ['--remote-debugging-port=9222'] });
   const browserURL = browser.wsEndpoint();
   console.log(`Chrome Instance URL: ${browserURL}`);
 
